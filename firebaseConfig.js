@@ -6,10 +6,6 @@ import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 import firebaseConfig from "./firebasekey";
 
-// const firebaseConfig = {
-    
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
