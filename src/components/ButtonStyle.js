@@ -1,4 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
+import colors from "../constants/Colors";
 
 export default function InputText({title, onPress, buttonstyle, fontsize, image}) {
     return (
@@ -16,8 +17,9 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 15,
         justifyContent: 'center',
-        marginTop: 24,
+        padding: 12,
+        paddingHorizontal: 30,
         width: '100%',
+        backgroundColor: colors.PRIMARY,
     },
-    
 });
