@@ -12,6 +12,10 @@ export default function Dashboard({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.title}>Dashboard</Text>
             <Text>AquaSense Analytics</Text>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("Login")}>
+                    <Text>About Us</Text>
+            </TouchableOpacity>
         </View>
     );
 }
