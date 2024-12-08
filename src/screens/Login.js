@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: "cyan",
         justifyContent: "center",
         paddingHorizontal: 40,
+        backgroundColor: colors.BACK,
     },
     form: {
         backgroundColor: "white",
