@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import ButtonStyle from '../components/ButtonStyle';
+// import ButtonStyle from '../components/ButtonStyle';
 import colors from "../constants/Colors";
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 
@@ -123,10 +123,10 @@ const styles = StyleSheet.create({
 
     },
     swipeLine: {
-        width: 40, // Width of the black line
-        height: 4, // Height of the black line
-        backgroundColor: '#000000', // Black color
-        borderRadius: 2, // Round the ends of the line
+        width: 40,
+        height: 4,
+        backgroundColor: '#000000', 
+        borderRadius: 2, 
     },
     swipeText: {
         fontSize: 20,
