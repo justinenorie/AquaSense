@@ -5,7 +5,7 @@ const colors = {
     ACCENT: '#D28A8A',
     SECONDARY: '#1F2240',
     TEXTwhite: '#EDEDED',
-    TEXTblack: '#202020',
+    TEXTblack: '#262626',
 
     //DarkMode shades
     DARKBACKGROUND: '#050315',

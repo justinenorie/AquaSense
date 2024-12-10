@@ -15,11 +15,26 @@ import colors from "../constants/colors";
 
 
 
-export default function App({ navigation }) {
-    const [Username, setUsername] = useState("");
-    const [Password, setPassword] = useState("");
-    // const [errors, setErrors] = useState({});
-    const handleLogin = () => navigation.navigate("Dashboard");
+export default function LoginScreen({ navigation }) {
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
+    const handleSignIn = () => {
+        // Handle sign-in logic
+        console.log('Sign In');
+    };
+
+    const handleGoogleSignIn = () => {
+        // Handle Google sign-in logic
+        console.log('Google Sign In');
+    };
+
+    const navigateToSignUp = () => {
+        navigation.navigate('SignUp');
+    };
 
     return (
         //<LinearGradient
@@ -114,8 +129,7 @@ const styles = StyleSheet.create({
         elevation: 2
     },
     input: {
-        height: 40,
-        borderColor: "#ddd",
+        height: 50,
         borderWidth: 1,
         marginBottom: 15,
         padding: 10,
@@ -123,9 +137,58 @@ const styles = StyleSheet.create({
         textAlign: "center"
         
     },
-    link: {
-        marginTop: 20,
-        alignItems: "center",
+    passwordToggle: {
+        marginLeft: 'auto',
+        paddingHorizontal: 10,
+    },
+    forgotPassword: {
+        alignSelf: 'flex-end',
+        marginVertical: 10,
+        color: '#007BFF', // Blue for clickable text
+        fontSize: 14,
+    },
+    signInButton: {
+        backgroundColor: '#4c669f', // Blue gradient start
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 25,
+        marginVertical: 15,
+    },
+    signInButtonText: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#FFFFFF',
+    },
+    googleButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#D3D3D3',
+        borderRadius: 25,
+        height: 50,
+        paddingHorizontal: 15,
+        justifyContent: 'center',
+        marginVertical: 10,
+    },
+    googleIcon: {
+        width: 24,
+        height: 24,
+        marginRight: 10,
+    },
+    googleButtonText: {
+        fontSize: 16,
+        color: '#202020',
+    },
+    footerText: {
+        textAlign: 'center',
+        marginTop: 10,
+        fontSize: 14,
+        color: '#202020',
+    },
+    signUpText: {
+        color: '#007BFF',
+        fontWeight: '600',
     },
     linkText: {
         color: "blue",
