@@ -9,7 +9,7 @@ import {
     Image
 } from "react-native";
 
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 
 export default function SignUp({ navigation }) {
     const [username, setUsername] = useState("");

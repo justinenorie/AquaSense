@@ -1,19 +1,5 @@
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    TextInput,
-    TouchableOpacity,
-    ImageBackground,
-    Image
-} from "react-native";
-const Line = require ("../assets/line.png")
-import { useState } from "react";
-import colors from "../constants/colors";
-//import LinearGradient from 'react-native-linear-gradient';
-
-
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 export default function LoginScreen({ navigation }) {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -37,105 +23,131 @@ export default function LoginScreen({ navigation }) {
     };
 
     return (
-        //<LinearGradient
-         // colors={['#C6F9FF', '#78F2FF']}
-         // locations={[0.58, 1]}
-         // style={{ flex: 1 }}
-        //>
-            
-             <ImageBackground source={require('../assets/aquawater.jpg')} style={{flex: 1}}>
-        //  
-            <View style={styles.container}>
+        <View style={styles.container}>
+            {/* Header Section */}
+            <View style={styles.header}>
+                <Image
+                    source={require('../assets/logo/AquaSense-Logo.png')} // Replace with your logo
+                    style={styles.headerImage}
+                />
+                <Text style={styles.headerText}>Hello, Welcome back!</Text>
+            </View>
 
-                 {/* Optional overlay for semi-transparent background */}
-                <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
-               
-               <Image 
-               source={Line}
-               style={styles.Lineimage}
-               />
+            {/* Form Section */}
+            <View style={styles.formContainer}>
+                <Text style={styles.formTitle}>Sign in to your account</Text>
 
-                <Text style={styles.Text}>Hi,</Text>
-                <Text style={styles.Text}>Welcome Back!</Text>
-
-                <View style={styles.form}>
-                    <Text style={styles.sign}>Sign in to your account</Text>
-                    <Text style={styles.label}>User</Text>
+                {/* Email Input */}
+                <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter your Username"
-                        value={Username}
-                        onChangeText={setUsername}
+                        placeholder="Enter your email"
+                        placeholderTextColor="#A9A9A9"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                     />
-                    <Text style={styles.label}>Password</Text>
+                </View>
+
+                {/* Password Input */}
+                <View style={[styles.inputContainer, styles.passwordInput]}>
                     <TextInput
-                        style={styles.input}
-                        placeholder="Enter your Password"
-                        value={Password}
-                        onChangeText={setPassword}
-                        secureTextEntry
+                        style={{ flex: 1, fontSize: 16, color: '#202020' }}
+                        placeholder="Enter your password"
+                        placeholderTextColor="#A9A9A9"
+                        secureTextEntry={!passwordVisible}
                     />
-                    <Button title="Sign Up" onPress={handleLogin} />
-                    <TouchableOpacity
-                        style={styles.link}
-                        onPress={() => navigation.navigate("SignUp")}
-                    >
-                        <Text style={styles.linkText}>Don't have an account? SignUp.</Text>
+                    <TouchableOpacity onPress={togglePasswordVisibility} style={styles.passwordToggle}>
+                        <Text style={{ fontSize: 16, color: '#007BFF' }}>
+                            {passwordVisible ? 'Hide' : 'Show'}
+                        </Text>
                     </TouchableOpacity>
-                </View> 
-           </View>
-             </ImageBackground>
-        //</LinearGradient>
+                </View>
+
+                <TouchableOpacity>
+                    <Text style={styles.forgotPassword}>Forgot password?</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+                    <Text style={styles.signInButtonText}>Sign In</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.googleButton} onPress={handleGoogleSignIn}>
+                    {/* FODO: 
+                    <Image
+                        source={require('../assets/icons/google-icon.png')} // Replace with your Google icon
+                        style={styles.googleIcon}
+                    /> */}
+                    <Text style={styles.googleButtonText}>Sign in with Google</Text>
+                </TouchableOpacity>
+
+                {/* Footer */}
+                <Text style={styles.footerText}>
+                    Don't have an account?{' '}
+                    <Text style={styles.signUpText} onPress={navigateToSignUp}>
+                        Sign up here
+                    </Text>
+                </Text>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        paddingHorizontal: 40,
+        backgroundColor: '#FFFFFF',
     },
-    lineImage: {
-        width: '100%',
-        height: 50,
-        resizeMode: 'contain',
+    header: {
+        flex: 2,
+        backgroundColor: '#78F2FF', // Matches the water background
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 50,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        overflow: 'hidden', // Ensures the background image stays within the border radius
+    },
+    headerImage: {
         marginBottom: 20,
     },
-    form: {
-        backgroundColor: "white",
-        
-        padding: 30,
-        borderRadius: 10,
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+    headerText: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#2C3E50', // Dark blue for text
+        textAlign: 'center',
     },
-    label: {
-        fontSize: 16,
-        marginBottom: 5,
-        fontWeight: "bold",
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 2
+    formContainer: {
+        flex: 3,
+        padding: 20,
+    },
+    formTitle: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#202020', // Blackish text color
+        marginBottom: 10,
+        textAlign: 'center',
+    },
+    inputContainer: {
+        marginVertical: 10,
     },
     input: {
         height: 50,
         borderWidth: 1,
-        marginBottom: 15,
-        padding: 10,
-        borderRadius: 15,
-        textAlign: "center"
-        
+        borderColor: '#D3D3D3', // Light grey border
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        backgroundColor: '#F9F9F9',
+        color: '#202020', // Text color inside the input
+        fontSize: 16,
+    },
+    passwordInput: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#D3D3D3',
+        borderRadius: 25,
+        backgroundColor: '#F9F9F9',
+        paddingHorizontal: 20,
     },
     passwordToggle: {
         marginLeft: 'auto',
@@ -190,18 +202,4 @@ const styles = StyleSheet.create({
         color: '#007BFF',
         fontWeight: '600',
     },
-    linkText: {
-        color: "blue",
-        textAlign: "center",
-    },
-    Text: {
-        fontSize: 40,
-        fontWeight: 'bold'
-       
-    },
-    sign: {
-        fontSize: 20,
-        marginBottom: 25,
-        fontWeight: "bold"
-    }
 });

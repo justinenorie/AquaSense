@@ -5,7 +5,7 @@ import {
     View,
     TouchableOpacity,
 } from "react-native";
-import colors from "../constants/colors";
+import colors from "../constants/Colors";
 
 export default function Dashboard({ navigation }) {
     return (
