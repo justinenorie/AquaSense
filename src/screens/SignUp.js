@@ -6,8 +6,10 @@ import {
     TextInput,
     TouchableOpacity,
     Alert,
+    Image
 } from "react-native";
-import colors from "../constants/Colors";
+
+import colors from "../constants/colors";
 
 export default function SignUp({ navigation }) {
     const [username, setUsername] = useState("");
@@ -36,51 +38,54 @@ export default function SignUp({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Sign Up</Text>
+        //<ImageBackground 
+         //   source={require('../assets/aquawater.png')} 
+          //  style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Sign Up</Text>
 
-            {/* Username Input */}
-            <Text style={styles.label}>Enter your username</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your username"
-                value={username}
-                onChangeText={setUsername}
-            />
-            {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
+                {/* Username Input */}
+                <Text style={styles.label}>Enter your username</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter your username"
+                    value={username}
+                    onChangeText={setUsername}
+                />
+                {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
 
-            {/* Password Input */}
-            <Text style={styles.label}>Enter your password</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+                {/* Password Input */}
+                <Text style={styles.label}>Enter your password</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+                {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
-            {/* Sign Up Button */}
-            <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-                <Text style={styles.buttonText}>Sign Up</Text>
-            </TouchableOpacity>
+                {/* Sign Up Button */}
+                <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+                    <Text style={styles.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
 
-            {/* Already Have an Account Link */}
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Login"); // Navigate to Login screen
-                }}
-            >
-                <Text style={styles.linkText}>Already have an account? Login here.</Text>
-            </TouchableOpacity>
-        </View>
+                {/* Already Have an Account Link */}
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate("Login"); // Navigate to Login screen
+                    }}
+                >
+                    <Text style={styles.linkText}>Already have an account? Login here.</Text>
+                </TouchableOpacity>
+            </View>
+        //</ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f5f5",
         justifyContent: "center",
         paddingHorizontal: 20,
     },
@@ -93,6 +98,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginBottom: 5,
+        fontWeight: "bold",
     },
     input: {
         height: 40,
@@ -100,13 +106,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 15,
         backgroundColor: "#fff",
+        textAlign: "center",
     },
     button: {
         backgroundColor: "#007BFF",
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: "center",
         marginVertical: 10,
     },
