@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FontsLoad from "./src/assets/fonts/fontsLoad";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import HomePage from "./src/screens/Home";
@@ -12,10 +13,11 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
     const [activeState, setActiveState] = useState("Dashboard");
+    <FontsLoad />
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Dashboard"
+                initialRouteName="Home"
                 screenOptions={{
                     headerShown: false,
                     animation: "fade",

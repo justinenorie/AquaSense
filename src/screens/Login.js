@@ -35,7 +35,7 @@ export default function LoginScreen({ navigation }) {
             })
             .catch((error) => {
                 console.error("Login Error:", error.message);
-                Alert.alert("Error", error.message || "Invalid credentials");
+                Alert.alert("Error", "Invalid credentials");
             });
     };
 
