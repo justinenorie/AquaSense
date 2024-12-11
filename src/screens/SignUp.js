@@ -8,6 +8,7 @@ import {
     Alert,
     Image
 } from "react-native";
+
 import colors from "../constants/Colors";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
@@ -74,16 +75,16 @@ export default function SignUp({ navigation }) {
             />
             {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
-            {/* Password Input */}
-            <Text style={styles.label}>Enter your password</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+                {/* Password Input */}
+                <Text style={styles.label}>Enter your password</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+                {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
             <Text style={styles.label}>Confirm your password</Text>
             <TextInput
@@ -100,22 +101,22 @@ export default function SignUp({ navigation }) {
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 
-            {/* Already Have an Account Link */}
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Login"); // Navigate to Login screen
-                }}
-            >
-                <Text style={styles.linkText}>Already have an account? Login here.</Text>
-            </TouchableOpacity>
-        </View>
+                {/* Already Have an Account Link */}
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate("Login"); // Navigate to Login screen
+                    }}
+                >
+                    <Text style={styles.linkText}>Already have an account? Login here.</Text>
+                </TouchableOpacity>
+            </View>
+        //</ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f5f5",
         justifyContent: "center",
         paddingHorizontal: 20,
     },
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginBottom: 5,
+        fontWeight: "bold",
     },
     input: {
         height: 40,
@@ -135,13 +137,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 15,
         backgroundColor: "#fff",
+        textAlign: "center",
     },
     button: {
         backgroundColor: "#007BFF",
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: "center",
         marginVertical: 10,
     },
