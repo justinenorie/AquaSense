@@ -10,7 +10,18 @@ import colors from "../constants/Colors";
 export default function Dashboard({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Dashboard</Text>
+            <Image
+                source={require('../assets/background/title-background.png')}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                }}
+                resizeMode="cover"
+            />
+            <Text style={styles.title}>About Us</Text>
             <Text>AquaSense Analytics</Text>
         </View>
     );

@@ -28,9 +28,9 @@ export default function HomePage({ navigation }) {
                         style={{
                             position: 'absolute',
                             top: 0,
+                            bottom: 0,
                             left: 0,
-                            width: '100%',
-                            height: '100%',
+                            right: 0,
                         }}
                         resizeMode="cover"
                     />
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     swipe: {
         position: 'absolute',
         bottom: 0,
-        height: 50, // Adjust for preferred height
+        height: 50, 
         width: '100%',
         backgroundColor: '#FFFFFF', // White background
         borderTopLeftRadius: 20, // Rounded corners

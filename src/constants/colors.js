@@ -1,8 +1,8 @@
 const colors = {
     //TODO: Change the Colors
     BACKGROUND: '#FAF9F6',
-    PRIMARY: '#DEB595',
-    ACCENT: '#D28A8A',
+    PRIMARY: '#35A4BD',
+    ACCENT: '#003F66',
     SECONDARY: '#1F2240',
     TEXTwhite: '#EDEDED',
     TEXTblack: '#262626',
