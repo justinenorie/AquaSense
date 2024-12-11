@@ -1,21 +1,21 @@
-import React from 'react';
-// import AppNavigator from './src/navigation/navigations';
+import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import HomePage from "./src/screens/Home";
 import LoginPage from "./src/screens/Login";
 import SignUpPage from "./src/screens/SignUp";
-import AboutUsPage from "./src/screens/AboutUs";
+import AboutUs from "./src/screens/AboutUs";
 import Dashboard from "./src/screens/Dashboard";
 
 //TODO: Add navigations here
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+    const [activeState, setActiveState] = useState("Dashboard");
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Dashboard"
                 screenOptions={{
                     headerShown: false,
                     animation: "fade",
@@ -24,8 +24,28 @@ export default function App() {
                 <Stack.Screen name="Home" component={HomePage} />
                 <Stack.Screen name="Login" component={LoginPage} />
                 <Stack.Screen name="SignUp" component={SignUpPage} />
-                <Stack.Screen name="AboutUs" component={AboutUsPage} />
-                <Stack.Screen name="Dashboard" component={Dashboard} />
+
+                {/* Menu Navigations */}
+                <Stack.Screen name="Dashboard">
+                    {(props) => (
+                        <Dashboard
+                            {...props}
+                            activeState={activeState}
+                            setActiveState={setActiveState}
+                        />
+                    )}
+                </Stack.Screen>
+
+                <Stack.Screen name="AboutUs">
+                    {(props) => (
+                        <AboutUs
+                            {...props}
+                            activeState={activeState}
+                            setActiveState={setActiveState}
+                        />
+                    )}
+                </Stack.Screen>
+
             </Stack.Navigator>
         </NavigationContainer>
     );
