@@ -45,14 +45,14 @@ const membersData = [
         id: 7,
         name: "Goerge Sindac",
         assign: "User Insight Specialist",
-        picture: "",
+        picture: "goergePic",
         description: "As a User Insight Specialist, To be Continued."
     },
      {
         id: 8,
         name: "Rose Marie Vinluan",
         assign: "Assurance Specialist",
-        picture: "",
+        picture: "vinluanPic",
         description: "As a Assurance Specialist, To be Continued."
     }
 ];

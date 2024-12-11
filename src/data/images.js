@@ -3,6 +3,8 @@ import brando from './picture/brando.jpg';
 import harlen from './picture/harlen.jpg';
 import rivas from './picture/rivas.jpg';
 import axel from './picture/axel.jpg';
+import vinluan from './picture/vinluan.jpg';
+import goerge from './picture/goerge.jpg';
 
 const images = {
     noriePic: norie,
@@ -10,6 +12,8 @@ const images = {
     harlenPic: harlen,
     rivasPic: rivas,
     axelPic: axel,
+    vinluanPic: vinluan,
+    goergePic: goerge,
 };
 
 export default images;
