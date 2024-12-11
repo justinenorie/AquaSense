@@ -1,17 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import ButtonStyle from '../components/ButtonStyle';
 import colors from "../constants/Colors";
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 export default function HomePage({ navigation }) {
     const handleLogin = () => navigation.navigate("Login");
 
-    // Define a swipe-up gesture
+    // Swipe animation
+    const animationValue = useRef(new Animated.Value(0)).current;
+    useEffect(() => {
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(animationValue, {
+                    toValue: -10,
+                    duration: 500,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(animationValue, {
+                    toValue: 0,
+                    duration: 500,
+                    useNativeDriver: true,
+                }),
+            ])
+        ).start();
+    }, [animationValue]);
+
+    // swipe-up gesture
     const swipeUpGesture = Gesture.Pan()
         .onEnd((e) => {
-            if (e.translationY < -100) { // Swipe up detected
+            if (e.translationY < -100) {
                 handleLogin();
             }
         });
@@ -54,14 +72,11 @@ export default function HomePage({ navigation }) {
                             />
                         </View>
 
-                        <View style={styles.content}>
-                            {/* <ButtonStyle
-                                title="Login"
-                                onPress={handleLogin}
-                                style={styles.loginButton}
-                            /> */}
-                            <Text style={styles.swipeText}>Swipe up to explore more</Text>
-                        </View>
+                        <Animated.View style={[{transform: [{ translateY: animationValue }]}, styles.content]}>
+                            <Text style={{ fontSize: 20, color: "#313131", fontWeight: "bold" }}>
+                                Swipe up to explore more
+                            </Text>
+                        </Animated.View>
                         <View style={styles.swipe}>
                             <View style={styles.swipeLine}></View>
                         </View>
@@ -101,25 +116,25 @@ const styles = StyleSheet.create({
     },
     content: {
         position: 'absolute',
-        bottom: 45,
+        bottom: 60,
     },
     swipe: {
         position: 'absolute',
         bottom: 0,
-        height: 50, 
+        height: 50,
         width: '100%',
-        backgroundColor: '#FFFFFF', // White background
-        borderTopLeftRadius: 20, // Rounded corners
-        borderTopRightRadius: 20,
+        backgroundColor: '#FFFFFF',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
         borderColor: '#000000',
         borderWidth: 1,
-        alignItems: 'center', // Center the drag indicator horizontally
-        justifyContent: 'center', // Center the drag indicator vertically
-        shadowColor: '#000', // Optional: Add shadow for depth
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: -2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
-        elevation: 5, // Android shadow
+        elevation: 5,
 
     },
     swipeLine: {
