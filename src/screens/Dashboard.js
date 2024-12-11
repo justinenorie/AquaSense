@@ -174,10 +174,9 @@ export default function Dashboard({ navigation, activeState, setActiveState }) {
                         resizeMode: 'contain',
                     }}
                 />
-                {/* Current Level */}
+
                 <Text style={styles.title}>{`Current Level: ${level}`}</Text>
 
-                {/* Progress Bar */}
                 <View style={styles.progressContainer}>
                     <View
                         style={[
@@ -192,7 +191,6 @@ export default function Dashboard({ navigation, activeState, setActiveState }) {
                     </View>
                 </View>
 
-                {/* Level Indicator */}
                 <View
                     style={{
                         alignItems: "center",
@@ -208,8 +206,6 @@ export default function Dashboard({ navigation, activeState, setActiveState }) {
                     <Text style={[styles.statusMessage, { color: progressBarColor }]}>{statusMessage}</Text>
                 </View>
 
-
-                {/* Temperature and Humidity Cards */}
                 {loading ? (
                     <ActivityIndicator size="large" color="#3498db" />
                 ) : (
@@ -221,7 +217,6 @@ export default function Dashboard({ navigation, activeState, setActiveState }) {
                                 {dhtTemperature ?? "Unavailable"}°C
                             </Text>
                         </View>
-
                         {/* Humidity Card */}
                         <View style={styles.card}>
                             <Text style={styles.cardTitle}>Humidity</Text>

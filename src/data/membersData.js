@@ -4,7 +4,7 @@ const membersData = [
         name: "Justine Norie B. Dela Cruz",
         assign: "Backend Developer",
         picture: "noriePic",
-        description: "As a Backend Developer, To be Continued."
+        description: "As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued.As a Backend Developer, To be Continued."
     },
     {
         id: 2,
@@ -31,28 +31,28 @@ const membersData = [
         id: 5,
         name: "Axel Villarta",
         assign: "Database Administrator",
-        picture: "rholinePic",
+        picture: "axelPic",
         description: "As a Database Administrator, To be Continued."
     },
     {
         id: 6,
         name: "Avril Faith Pasiona",
         assign: "UI/UX Designer",
-        picture: "marachaPic",
+        picture: "avrilPic",
         description: "As a UI/UX Designer, To be Continued."
     },
     {
         id: 7,
         name: "Goerge Sindac",
         assign: "User Insight Specialist",
-        picture: "froceliePic",
+        picture: "georgePic",
         description: "As a User Insight Specialist, To be Continued."
     },
      {
         id: 8,
         name: "Rose Marie Vinluan",
         assign: "Assurance Specialist",
-        picture: "froceliePic",
+        picture: "rosePic",
         description: "As a Assurance Specialist, To be Continued."
     }
 ];
