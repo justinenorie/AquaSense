@@ -8,4 +8,4 @@ export default function NavigateButtons({ navigation }){
             </TouchableOpacity>
         </View>
     );
-}
+};

@@ -10,49 +10,70 @@ import {
 } from "react-native";
 
 import colors from "../constants/Colors";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 export default function SignUp({ navigation }) {
-    const [username, setUsername] = useState("");
+    const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-    const validateForm = () => {
+    const isFormValid = () => {
         let formErrors = {};
 
-        if (!username) formErrors.username = "Username is required";
-        if (!password) formErrors.password = "Password is required";
+        if (!email.includes("@")) formErrors.email = "Email is required";
+        if (password.length < 8) formErrors.password = "Password must be at least 8 characters";
 
         setErrors(formErrors);
 
         return Object.keys(formErrors).length === 0;
     };
 
-    const handleSignUp = () => {
-        if (validateForm()) {
-            Alert.alert("Sign Up Successful", `Welcome, ${username}!`);
-            setUsername("");
+    const handleSignUp = async () => {
+        if (!isFormValid()) {
+            Alert.alert(
+                "Try again",
+                "Please enter a valid email and matching passwords with at least 8 characters"
+            );
+            return;
+        }
+
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            Alert.alert("Success", "Account created successfully");
+            setemail("");
             setPassword("");
-            setErrors({});
-            // navigation.navigate('Login'); 
+            navigation.navigate("Login");
+        } catch (error) {
+            Alert.alert("Error", `Error creating user: ${error.message}`);
         }
     };
 
     return (
-        //<ImageBackground 
-         //   source={require('../assets/aquawater.png')} 
-          //  style={{ flex: 1 }}>
-            <View style={styles.container}>
-                <Text style={styles.title}>Sign Up</Text>
+        <View style={styles.container}>
+            <Image
+                source={require('../assets/background/title-background.png')}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                }}
+                resizeMode="cover"
+            />
 
-                {/* Username Input */}
-                <Text style={styles.label}>Enter your username</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your username"
-                    value={username}
-                    onChangeText={setUsername}
-                />
-                {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
+            <Text style={styles.title}>Sign Up</Text>
+
+            {/* email Input */}
+            <Text style={styles.label}>Enter your email</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Enter your email"
+                value={email}
+                onChangeText={setemail}
+            />
+            {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
                 {/* Password Input */}
                 <Text style={styles.label}>Enter your password</Text>
@@ -65,10 +86,20 @@ export default function SignUp({ navigation }) {
                 />
                 {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
-                {/* Sign Up Button */}
-                <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
+            <Text style={styles.label}>Confirm your password</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Confirm your password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+            />
+            {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
+            {/* Sign Up Button */}
+            <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+                <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableOpacity>
 
                 {/* Already Have an Account Link */}
                 <TouchableOpacity
