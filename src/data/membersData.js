@@ -11,7 +11,7 @@ const membersData = [
         name: "Brando Baja",
         assign: "Release Manager",
         picture: "brandoPic",
-        description: "As a Backend Developer, To be Continued."
+        description: "As a Release Manager, To be Continued."
     },
     {
         id: 3,
