@@ -5,6 +5,8 @@ import rivas from './picture/rivas.jpg';
 import axel from './picture/axel.jpg';
 import vinluan from './picture/vinluan.jpg';
 import goerge from './picture/goerge.jpg';
+import faith from './picture/faith.jpg';
+
 
 const images = {
     noriePic: norie,
@@ -14,6 +16,7 @@ const images = {
     axelPic: axel,
     vinluanPic: vinluan,
     goergePic: goerge,
+    faithPic: faith,
 };
 
 export default images;

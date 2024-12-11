@@ -38,7 +38,7 @@ const membersData = [
         id: 6,
         name: "Avril Faith Pasiona",
         assign: "UI/UX Designer",
-        picture: "",
+        picture: "faithPic",
         description: "As a UI/UX Designer, To be Continued."
     },
     {
