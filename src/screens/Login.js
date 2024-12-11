@@ -9,6 +9,9 @@ import {
     Alert
 } from "react-native";
 import ButtonStyle from "../components/ButtonStyle";
+import colors from "../constants/Colors";
+import fonts from "../constants/typography";
+import { LinearGradient } from 'expo-linear-gradient';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 
@@ -34,7 +37,7 @@ export default function LoginScreen({ navigation }) {
                 navigation.navigate("Dashboard");
             })
             .catch((error) => {
-                console.error("Login Error:", error.message);
+                // console.error("Login Error:", error.message);
                 Alert.alert("Error", "Invalid credentials");
             });
     };
@@ -52,7 +55,11 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             {/* Header Section */}
-            <View style={styles.header}>
+            <LinearGradient
+                colors={['#78F2FF', '#C6F9FF', '#FFFFFF']}
+                locations={[0, 0.5, 1]}
+                style={styles.header}>
+
                 <Image source={require("../assets/background/water-background.png")}
                     style={{
                         position: 'absolute',
@@ -67,18 +74,21 @@ export default function LoginScreen({ navigation }) {
                     source={require("../assets/logo/AquaSense-Logo.png")} // Replace with your logo
                     style={styles.headerImage}
                 />
-                <Text style={styles.headerText}>Hello</Text>
-                <Text style={styles.headerText}>Welcome back!</Text>
-            </View>
+                <View style={{width: '100%', paddingHorizontal: 30}}>
+                    <Text style={[styles.headerText, fonts.h1]}>Hello</Text>
+                    <Text style={[styles.headerText, fonts.h1]}>Welcome back!</Text>
+                </View>
+            </LinearGradient>
 
             {/* Form Section */}
             <View style={styles.formContainer}>
-                <Text style={styles.formTitle}>Sign in to your account</Text>
+                <Text style={[fonts.h2, styles.formTitle]}>Sign in to your account</Text>
 
                 {/* Email Input */}
+                <Text style={[fonts.h3, { marginTop: 15 }]}>Email</Text>
                 <View style={styles.inputContainer}>
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, fonts.small]}
                         placeholder="Enter your email"
                         placeholderTextColor="#A9A9A9"
                         keyboardType="email-address"
@@ -89,9 +99,10 @@ export default function LoginScreen({ navigation }) {
                 </View>
 
                 {/* Password Input */}
+                <Text style={[fonts.h3, { marginTop: 15 }]}>Password</Text>
                 <View style={[styles.inputContainer, styles.passwordInput]}>
                     <TextInput
-                        style={{ flex: 1, fontSize: 16, color: "#202020" }}
+                        style={[{ flex: 1, fontSize: 16, color: "#202020", height: 50, }, fonts.small]}
                         placeholder="Enter your password"
                         placeholderTextColor="#A9A9A9"
                         secureTextEntry={!passwordVisible}
@@ -114,18 +125,40 @@ export default function LoginScreen({ navigation }) {
 
                 <ButtonStyle
                     title="Sign In"
-                    onPress={handleSignIn}>
-                </ButtonStyle>
+                    onPress={handleSignIn}
+                    fontsize={{
+                        color: colors.TEXTwhite,
+                        fontSize: 18
+                    }}
+                />
+
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginTop: 24,
+                    }}
+                >
+                    <View style={styles.line}></View>
+                    <Text
+                        style={[
+                            fonts.h1,
+                            { fontSize: 24, paddingHorizontal: 8 },
+                        ]}
+                    >
+                        OR
+                    </Text>
+                    <View style={styles.line}></View>
+                </View>
 
                 <TouchableOpacity
                     style={styles.googleButton}
                     onPress={handleGoogleSignIn}
                 >
-                    {/* FODO: 
                     <Image
-                        source={require('../assets/icons/google-icon.png')} // Replace with your Google icon
+                        source={require('../assets/logo/google.png')} // Replace with your Google icon
                         style={styles.googleIcon}
-                    /> */}
+                    />
                     <Text style={styles.googleButtonText}>
                         Sign in with Google
                     </Text>
@@ -146,17 +179,11 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF",
     },
     header: {
         flex: 2,
-        backgroundColor: "#78F2FF", // Matches the water background
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: 50,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        overflow: "hidden", // Ensures the background image stays within the border radius
     },
     headerImage: {
         marginBottom: 20,
@@ -164,22 +191,19 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 28,
         fontWeight: "bold",
-        color: "#2C3E50", // Dark blue for text
-        textAlign: "center",
+        color: colors.ACCENT, 
     },
     formContainer: {
         flex: 3,
         padding: 20,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        backgroundColor: colors.BACKGROUND,
     },
     formTitle: {
-        fontSize: 20,
-        fontWeight: "600",
         color: "#202020", // Blackish text color
         marginBottom: 10,
         textAlign: "center",
-    },
-    inputContainer: {
-        marginVertical: 10,
     },
     input: {
         height: 50,
@@ -206,7 +230,7 @@ const styles = StyleSheet.create({
     },
     forgotPassword: {
         alignSelf: "flex-end",
-        marginVertical: 10,
+        marginVertical: 20,
         color: "#007BFF", // Blue for clickable text
         fontSize: 14,
     },
@@ -218,7 +242,6 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         height: 50,
         paddingHorizontal: 15,
-        justifyContent: "center",
         marginVertical: 10,
     },
     googleIcon: {
@@ -239,5 +262,10 @@ const styles = StyleSheet.create({
     signUpText: {
         color: "#007BFF",
         fontWeight: "600",
+    },
+    line: {
+        flex: 1,
+        height: 1,
+        backgroundColor: "#000",
     },
 });
