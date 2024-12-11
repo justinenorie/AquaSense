@@ -11,8 +11,9 @@ import { ref, onValue } from "firebase/database";
 import { rtdb } from "../../firebaseConfig";
 import { LinearGradient } from 'expo-linear-gradient';
 import colors from "../constants/Colors";
+import NavigationButton from "../components/NavigationButton";
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ navigation, activeState, setActiveState }) {
     const [waterHeight, setWaterHeight] = useState(null);
     const [dhtTemperature, setDhtTemperature] = useState(null);
     const [dhtHumidity, setDhtHumidity] = useState(null);
@@ -130,49 +131,53 @@ export default function Dashboard({ navigation }) {
 
     if (waterHeight <= 25) {
         level = "Level 1";
-        indicator="Safe";
+        indicator = "Safe";
         statusMessage = "There's no flood risk at the moment.";
         progressBarColor = "#2ecc71"; // Green
     } else if (waterHeight <= 50) {
         level = "Level 2";
-        indicator="Caution";
+        indicator = "Caution";
         statusMessage = "Water level rising, stay alert.";
         progressBarColor = "#f1c40f"; // Yellow
     } else if (waterHeight <= 75) {
         level = "Level 3";
-        indicator="Warning";
+        indicator = "Warning";
         statusMessage = "Water level high, prepare for potential flooding.";
         progressBarColor = "#e67e22"; // Orange
     } else {
         level = "Level 4";
-        indicator="Danger";
+        indicator = "Danger";
         statusMessage = "Severe flood risk, evacuate immediately.";
         progressBarColor = "#e74c3c"; // Red
     }
 
     return (
         <LinearGradient
-            colors={['#78F2FF', '#C6F9FF', '#FFFFFF']}
+            colors={["#78F2FF", "#C6F9FF", "#FFFFFF"]}
             locations={[0, 0.5, 1]}
             style={styles.background}
         >
+            {/* Background Overlay */}
             <Image
-                source={require('../assets/background/title-background.png')}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    opacity: 0.5
-                }}
+                source={require("../assets/background/title-background.png")}
+                style={styles.overlayImage}
                 resizeMode="cover"
             />
             <View style={styles.container}>
-
+                <Image
+                    source={require("../assets/logo/AquaSense.png")}
+                    style={{
+                        position: 'absolute',
+                        top: 40,
+                        left: 10,
+                        width: 200,
+                        resizeMode: 'contain',
+                    }}
+                />
+                {/* Current Level */}
                 <Text style={styles.title}>{`Current Level: ${level}`}</Text>
 
-                {/* Progress Bar Container */}
+                {/* Progress Bar */}
                 <View style={styles.progressContainer}>
                     <View
                         style={[
@@ -187,24 +192,51 @@ export default function Dashboard({ navigation }) {
                     </View>
                 </View>
 
-                <Text style={[styles.status, { color: progressBarColor }]}>{indicator}</Text>
-                <Text style={[styles.statusMessage, { color: progressBarColor }]}>{statusMessage}</Text>
+                {/* Level Indicator */}
+                <View
+                    style={{
+                        alignItems: "center",
+                        backgroundColor: colors.CARD,
+                        padding: 10,
+                        borderRadius: 20,
+                        shadowColor: "#000",
+                        shadowOffset: { width: 2, height: 4 },
+                        shadowOpacity: 0.3,
+                        elevation: 5,
+                    }}>
+                    <Text style={[styles.status, { color: progressBarColor }]}>{indicator}</Text>
+                    <Text style={[styles.statusMessage, { color: progressBarColor }]}>{statusMessage}</Text>
+                </View>
 
-                {/* Temperature and Humidity */}
+
+                {/* Temperature and Humidity Cards */}
                 {loading ? (
                     <ActivityIndicator size="large" color="#3498db" />
                 ) : (
-                    <View style={styles.infoContainer}>
-                        <Text style={styles.dataText}>
-                            Temperature: {dhtTemperature ?? "Unavailable"}°C
-                        </Text>
-                        <Text style={styles.dataText}>
-                            Humidity: {dhtHumidity ?? "Unavailable"}%
-                        </Text>
+                    <View style={styles.cardContainer}>
+                        {/* Temperature Card */}
+                        <View style={styles.card}>
+                            <Text style={styles.cardTitle}>Temperature</Text>
+                            <Text style={styles.cardValue}>
+                                {dhtTemperature ?? "Unavailable"}°C
+                            </Text>
+                        </View>
+
+                        {/* Humidity Card */}
+                        <View style={styles.card}>
+                            <Text style={styles.cardTitle}>Humidity</Text>
+                            <Text style={styles.cardValue}>
+                                {dhtHumidity ?? "Unavailable"}%
+                            </Text>
+                        </View>
                     </View>
                 )}
-
             </View>
+            <NavigationButton
+                navigation={navigation}
+                activeState={activeState}
+                setActiveState={setActiveState}
+            />
         </LinearGradient>
     );
 }
@@ -212,8 +244,16 @@ export default function Dashboard({ navigation }) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    overlayImage: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        opacity: 0.8,
     },
     container: {
         flex: 1,
@@ -222,23 +262,23 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: "bold",
         marginBottom: 20,
         color: "#333",
     },
     progressContainer: {
-        width: 100,
-        height: 200,
+        width: 120,
+        height: 250,
         backgroundColor: "#e0e0e0",
-        borderRadius: 20,
+        borderRadius: 30,
         overflow: "hidden",
         justifyContent: "flex-end",
         alignItems: "center",
-        marginBottom: 10,
+        marginBottom: 20,
         shadowColor: "#000",
         shadowOffset: { width: 5, height: 5 },
-        shadowOpacity: 1,
+        shadowOpacity: 0.3,
         elevation: 10,
     },
     progressBar: {
@@ -258,16 +298,38 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 5,
     },
-    statusMessage:{
+    statusMessage: {
         fontSize: 16,
-        
+        textAlign: "center",
+        paddingHorizontal: 10,
     },
-    infoContainer: {
+    cardContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
         marginTop: 20,
+        width: "100%",
+        paddingHorizontal: 20,
     },
-    dataText: {
-        fontSize: 16,
-        color: "#333",
+    card: {
+        backgroundColor: colors.CARD,
+        borderRadius: 15,
+        padding: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        width: "45%",
+        shadowColor: "#000",
+        shadowOffset: { width: 2, height: 4 },
+        shadowOpacity: 0.3,
+        elevation: 5,
+    },
+    cardTitle: {
+        fontSize: 18,
+        color: "#666",
         marginBottom: 10,
+    },
+    cardValue: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: "#333",
     },
 });
