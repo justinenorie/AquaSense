@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#333",
         lineHeight: 22,
+        textAlign: "center",
     },
 
     formContainer: {

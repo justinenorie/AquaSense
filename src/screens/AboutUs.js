@@ -5,7 +5,7 @@ import {
     View,
     Image,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
 } from "react-native";
 import NavigationButton from "../components/NavigationButton";
 import descriptions from "../data/descriptions";
@@ -14,13 +14,13 @@ import fonts from "../constants/typography";
 import colors from "../constants/Colors";
 import data from "../data/membersData";
 import images from "../data/images";
+import palette from "../assets/palette.png";
 
 export default function AquaSenseInfoCard({
     navigation,
     activeState,
     setActiveState,
 }) {
-
     return (
         <LinearGradient
             colors={["#78F2FF", "#C6F9FF", "#FFFFFF"]}
@@ -102,12 +102,23 @@ export default function AquaSenseInfoCard({
                                         borderRadius: 25,
                                         borderWidth: 2,
                                         marginVertical: 15,
+                                        alignItems: "center",
                                     },
                                     fonts.h2,
                                 ]}
                             >
                                 Color Palette:
                                 {/* Color Pallete here */}
+                                <Image
+                                    source={palette}
+                                    style={{
+                                        width: "45%",
+                                        height: 35,
+                                        alignSelf: "center",
+                                        justifyContent: 'center',
+                                    }}
+                                    resizeMode="contain"
+                                />
                             </Text>
 
                             <Text
@@ -122,8 +133,7 @@ export default function AquaSenseInfoCard({
                                     fonts.h2,
                                 ]}
                             >
-                                Typography:  POPPINS
-
+                                Typography: POPPINS
                             </Text>
                         </View>
                     </View>
@@ -134,26 +144,41 @@ export default function AquaSenseInfoCard({
                             style={[
                                 {
                                     color: colors.ACCENT,
-                                    textAlign: 'center'
+                                    textAlign: "center",
                                 },
                                 fonts.h1,
                             ]}
-                        >CREATORS</Text>
+                        >
+                            CREATORS
+                        </Text>
 
                         {/* TODO: onPress={() => openModal(member)} */}
                         {data.map((member) => (
                             <TouchableOpacity
                                 key={member.id}
-                                onPress={() => navigation.navigate("MemberProfile", { member })} // Pass member data
+                                onPress={() =>
+                                    navigation.navigate("MemberProfile", {
+                                        member,
+                                    })
+                                } // Pass member data
                             >
                                 <View style={styles.memberCard}>
-                                    <Image source={images[member.picture]} style={styles.memberImage} />
-                                    <Text style={[fonts.membername, { color: colors.ACCENT }]}>{member.name}</Text>
+                                    <Image
+                                        source={images[member.picture]}
+                                        style={styles.memberImage}
+                                    />
+                                    <Text
+                                        style={[
+                                            fonts.membername,
+                                            { color: colors.ACCENT },
+                                        ]}
+                                    >
+                                        {member.name}
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                         ))}
                     </View>
-
                 </View>
             </ScrollView>
 
