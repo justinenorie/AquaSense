@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
-import colors from "../constants/Colors";
+import colors from "../constants/colors";
 
 export default function InputText({title, onPress, buttonstyle, fontsize, image}) {
     return (
