@@ -38,33 +38,21 @@ const membersData = [
         id: 6,
         name: "Avril Faith Pasiona",
         assign: "UI/UX Designer",
-<<<<<<< HEAD
         picture: "avrilPic",
-=======
-        picture: "",
->>>>>>> Revon23
         description: "As a UI/UX Designer, To be Continued."
     },
     {
         id: 7,
         name: "Goerge Sindac",
         assign: "User Insight Specialist",
-<<<<<<< HEAD
         picture: "georgePic",
-=======
-        picture: "",
->>>>>>> Revon23
         description: "As a User Insight Specialist, To be Continued."
     },
      {
         id: 8,
         name: "Rose Marie Vinluan",
         assign: "Assurance Specialist",
-<<<<<<< HEAD
         picture: "rosePic",
-=======
-        picture: "",
->>>>>>> Revon23
         description: "As a Assurance Specialist, To be Continued."
     }
 ];
