@@ -1,29 +1,35 @@
-# AquaSense
+# AquaSense - Water Level Monitoring System
 
-**IoT-Based Water Level Detection and Monitoring App**
-
-AquaSense is a React Native mobile application designed to monitor water levels in real-time using an ESP32 microcontroller and IoT technology. The app provides users with precise water height measurements and categorized water level warnings (e.g., low, medium, high, critical), ensuring effective water management. AquaSense is compatible with Android, iOS, and web platforms.
+AquaSense is an IoT-based solution for monitoring water levels in real-time using the ESP32 microcontroller and a React Native mobile application. It allows users to track water levels, receive warnings, and view graphical data through Firebase integration.
 
 ---
 
 ## Features
-
 - **Real-time Monitoring**: Get up-to-date water level information from the ESP32 microcontroller via Wi-Fi.
-- **Warning Levels**: View categorized water levels with warnings for proactive decision-making.
+- **Warning Levels**: View categorized water levels with warnings.
 - **Cross-Platform Support**: Compatible with Android, iOS, and web platforms using Expo.
 - **Interactive UI**: Intuitive and responsive design for seamless user experience.
-
 ---
 
-## Installation Guide
-
-Follow these steps to set up and run AquaSense on your local machine:
-
+# Getting Started
 ### Prerequisites
 
+- React Native and ESP32 development environment.
+
+- Firebase project setup with Realtime Database enabled.
+
+**React Native**
 - [Node.js](https://nodejs.org/) installed (version 14 or higher recommended).
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) package manager.
 - [Expo CLI](https://docs.expo.dev/get-started/installation/) installed globally (optional, for additional tools).
+
+**ESP 32**
+- ESP32 microcontroller.
+- Water level sensor.
+- RGB LEDs and buzzer for alerts.
+- OLED display (optional for local data display).
+
+## Installation Guide and connecting the ESP32 to AquaSense
 
 ### Clone the Repository
 
@@ -32,9 +38,9 @@ git clone https://github.com/justinenorie/AquaSense.git
 cd AquaSense
 ```
 
-### Install Dependencies
+---
 
-Install the required packages by running:
+### Step 1: Install the required packages in React Native App by running:
 
 ```bash
 npm install
@@ -42,7 +48,7 @@ npm install
 yarn install
 ```
 
-### Setup Firebase Configuration
+#### Setup Firebase Configuration
 
 1. Locate the configuration file named `configuration.env` in the project directory.
 2. Rename the file to `.env`.
@@ -60,6 +66,27 @@ MEASUREMENT_ID="<YOUR_MEASUREMENT_ID>"
 ```
 
 Replace `<YOUR_API_KEY>`, `<YOUR_AUTH_DOMAIN>`, and other placeholders with your actual Firebase project credentials.
+
+---
+
+### Step 2: Configure the ESP32 Microcontroller
+
+1. **Connect to Wi-Fi**
+   - Update the `WIFI_SSID` and `WIFI_PASSWORD` constants in the ESP32 code with your Wi-Fi credentials.
+   - The ESP32 connects to the network and retrieves its IP address. Ensure the network allows local device communication.
+
+2. **Setup Firebase on ESP32**
+   - Update the Firebase credentials in the ESP32 code (`API_KEY`, `USER_EMAIL`, `USER_PASSWORD`, and `DATABASE_URL`).
+   - Use the [Firebase ESP32 SDK](https://github.com/mobizt/Firebase-ESP-Client) to integrate Firebase Realtime Database.
+
+3. **Configure Sensors and Outputs**
+   - Connect the water level sensor to the `SIGNAL_PIN` and `POWER_PIN` as defined in the ESP32 code.
+   - Set up RGB LEDs and a buzzer for visual and audio warnings.
+   - Attach the OLED display to display real-time data locally.
+
+4. **Program the ESP32**
+   - Use the Arduino IDE to upload the configured code to the ESP32.
+   - Ensure all libraries are correctly installed to avoid compilation errors.
 
 ---
 
@@ -87,35 +114,10 @@ This mode uses a tunnel to bypass network restrictions, making it easier to conn
 
 ---
 
-## Connecting the ESP32 to AquaSense
-
-1. Configure the ESP32 microcontroller to log data into Firebase's Realtime Database. This involves:
-   - Setting up Firebase in your ESP32 project.
-   - Using the Firebase SDK for ESP32 to authenticate and push water level data to the Realtime Database.
-2. In the AquaSense app, integrate Firebase by:
-   - Installing the Firebase SDK for React Native.
-   - Fetching real-time updates from the Firebase Realtime Database to display water levels dynamically in the app.
-3. Ensure the Firebase configuration in both ESP32 and AquaSense matches your project settings for seamless integration.
+# Contributing
+Contributions are welcome! Please fork the repository and create a pull request with detailed information about the changes.
 
 ---
 
-## Development Notes
-
-- Ensure both the ESP32 and AquaSense app are properly configured with Firebase credentials.
-- For any issues during development, check the Expo documentation or refer to the app's error logs.
-
----
-
-## License
-
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-## Contribution
-
-We welcome contributions to enhance AquaSense! Please submit a pull request or open an issue for discussions.
-
----
-
-Enjoy using AquaSense to make water management smarter and more efficient!
+# License
+This project is licensed under the MIT License. See the `LICENSE` file for details.
